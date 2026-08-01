@@ -4015,7 +4015,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4023,7 +4023,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "-max by (instance) (irate(windows_logical_disk_reads_total[2m]))",
+                        "editorMode": "code",
+                        "expr": "-max by (instance) (rate(windows_logical_disk_reads_total{job=~\"$job\"}[5m]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4043,6 +4044,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -4056,7 +4058,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4064,7 +4066,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "max by (instance) (irate(windows_logical_disk_writes_total[2m]))",
+                        "editorMode": "code",
+                        "expr": "max by (instance) (rate(windows_logical_disk_writes_total{job=~\"$job\"}[5m]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4084,6 +4087,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
