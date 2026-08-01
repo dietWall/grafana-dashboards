@@ -3181,7 +3181,7 @@
               },
               "options": {
                 "cellHeight": "sm",
-                "frameIndex": 4,
+                "frameIndex": 2,
                 "showHeader": true
               }
             },
@@ -3331,13 +3331,13 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "100.0 - 100 * windows_memory_physical_free_bytes{job=~\"$job\"} / windows_memory_physical_total_bytes{job=~\"$job\"}",
+                        "expr": "100.0 - 100 * (windows_memory_physical_free_bytes{job=~\"$job\"} / windows_memory_physical_total_bytes{job=~\"$job\"})\r\n",
                         "instant": false,
                         "interval": "",
                         "legendFormat": "{{instance}}"
