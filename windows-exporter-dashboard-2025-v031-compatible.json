@@ -2042,13 +2042,13 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "(irate(windows_net_bytes_total{job=~\"$job\",instance=~\"$instance\",nic!~'isatap.*|VPN.*'}[5m]) * 8 / windows_net_current_bandwidth_bytes{job=~\"$job\",instance=~\"$instance\",nic!~'isatap.*|VPN.*'}) * 100",
+                        "expr": "(max by (interface) (rate(windows_net_bytes_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) * 8 / max by (interface) (windows_net_current_bandwidth_bytes{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"})) * 100\r\n",
                         "legendFormat": "{{nic}}",
                         "range": true
                       },
