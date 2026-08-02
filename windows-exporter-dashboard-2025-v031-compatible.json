@@ -569,7 +569,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -577,7 +577,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_system_exception_dispatches_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "editorMode": "code",
+                        "expr": "max by (instance) (rate(windows_system_exception_dispatches_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -597,6 +598,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
