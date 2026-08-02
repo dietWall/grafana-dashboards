@@ -43,7 +43,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -52,7 +52,7 @@
                           "filter": ""
                         },
                         "editorMode": "code",
-                        "expr": "irate(windows_net_packets_outbound_discarded_total{job=~\"$job\",instance=~\"$instance\", nic!~'isatap.*|VPN.*'}[5m]) + irate(windows_net_packets_outbound_errors_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "expr": "max by (interface) (rate(windows_net_packets_outbound_discarded_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) + \r\nmax by (interface) (rate(windows_net_packets_outbound_errors_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -86,7 +86,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -95,7 +95,7 @@
                           "filter": ""
                         },
                         "editorMode": "code",
-                        "expr": "irate(windows_net_packets_received_discarded_total{job=~\"$job\",instance=~\"$instance\", nic!~'isatap.*|VPN.*'}[5m]) + irate(windows_net_packets_received_errors_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "expr": "max by (interface) (rate(windows_net_packets_received_discarded_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) + \r\nmax by (interface) (rate(windows_net_packets_received_errors_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
