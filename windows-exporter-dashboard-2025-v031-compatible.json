@@ -1889,13 +1889,13 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "windows_system_processes{job=~\"$job\",instance=~\"$instance\"}",
+                        "expr": "max by (instance) (windows_system_processes{job=~\"$job\", instance=~\"$instance\"})",
                         "instant": false,
                         "interval": "",
                         "legendFormat": "Number of processes"
