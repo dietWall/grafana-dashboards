@@ -1201,7 +1201,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -1209,7 +1209,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "windows_logical_disk_free_bytes{job=~\"$job\",instance=~\"$instance\"}",
+                        "editorMode": "code",
+                        "expr": "windows_logical_disk_free_bytes{job=~\"$job\", instance=~\"$instance\"}",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -1229,6 +1230,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -1242,7 +1244,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -1250,7 +1252,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "windows_logical_disk_size_bytes{job=~\"$job\",instance=~\"$instance\"}",
+                        "editorMode": "code",
+                        "expr": "windows_logical_disk_size_bytes{job=~\"$job\", instance=~\"$instance\"}",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -1270,6 +1273,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -5179,7 +5183,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-1h",
+      "from": "now-3h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
