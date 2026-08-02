@@ -4610,7 +4610,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4618,7 +4618,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_logical_disk_reads_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "editorMode": "code",
+                        "expr": "max by (volume) (rate(windows_logical_disk_writes_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4637,6 +4638,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -4650,7 +4652,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4658,7 +4660,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_logical_disk_writes_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "editorMode": "code",
+                        "expr": "max by (volume) (rate(windows_logical_disk_reads_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4677,6 +4680,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
