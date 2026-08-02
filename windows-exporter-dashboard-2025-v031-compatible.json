@@ -3195,7 +3195,7 @@
               },
               "options": {
                 "cellHeight": "sm",
-                "frameIndex": 2,
+                "frameIndex": 0,
                 "showHeader": true
               }
             },
