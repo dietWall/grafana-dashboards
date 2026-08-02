@@ -43,7 +43,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -52,7 +52,7 @@
                           "filter": ""
                         },
                         "editorMode": "code",
-                        "expr": "irate(windows_net_packets_outbound_discarded_total{job=~\"$job\",instance=~\"$instance\", nic!~'isatap.*|VPN.*'}[5m]) + irate(windows_net_packets_outbound_errors_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "expr": "max by (interface) (rate(windows_net_packets_outbound_discarded_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) + \r\nmax by (interface) (rate(windows_net_packets_outbound_errors_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -86,7 +86,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -95,7 +95,7 @@
                           "filter": ""
                         },
                         "editorMode": "code",
-                        "expr": "irate(windows_net_packets_received_discarded_total{job=~\"$job\",instance=~\"$instance\", nic!~'isatap.*|VPN.*'}[5m]) + irate(windows_net_packets_received_errors_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "expr": "max by (interface) (rate(windows_net_packets_received_discarded_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) + \r\nmax by (interface) (rate(windows_net_packets_received_errors_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -232,7 +232,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -240,7 +240,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_net_bytes_sent_total{job=~\"$job\",instance=~\"$instance\",nic!~'isatap.*|VPN.*'}[5m])*8\u003e0\r",
+                        "editorMode": "code",
+                        "expr": "-max by (interface) (rate(windows_net_bytes_received_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) * 8\r\n\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -260,6 +261,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 10
                       },
                       "version": "v0"
@@ -273,7 +275,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -281,7 +283,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_net_bytes_received_total{job=~\"$job\",instance=~\"$instance\",nic!~'isatap.*|VPN.*'}[5m])*8\n",
+                        "editorMode": "code",
+                        "expr": "max by (interface) (rate(windows_net_bytes_sent_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) * 8\n\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -300,6 +303,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 10
                       },
                       "version": "v0"
@@ -419,7 +423,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -427,7 +431,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "windows_system_threads{job=~\"$job\",instance=~\"$instance\"}",
+                        "editorMode": "code",
+                        "expr": "max by (instance) (windows_system_threads{job=~\"$job\", instance=~\"$instance\"})\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -447,6 +452,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -563,7 +569,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -571,7 +577,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_system_exception_dispatches_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "editorMode": "code",
+                        "expr": "max by (instance) (rate(windows_system_exception_dispatches_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -591,6 +598,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -1201,7 +1209,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -1209,7 +1217,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "windows_logical_disk_free_bytes{job=~\"$job\",instance=~\"$instance\"}",
+                        "editorMode": "code",
+                        "expr": "windows_logical_disk_free_bytes{job=~\"$job\", instance=~\"$instance\"}",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -1229,6 +1238,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -1242,7 +1252,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -1250,7 +1260,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "windows_logical_disk_size_bytes{job=~\"$job\",instance=~\"$instance\"}",
+                        "editorMode": "code",
+                        "expr": "windows_logical_disk_size_bytes{job=~\"$job\", instance=~\"$instance\"}",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -1270,6 +1281,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -1877,13 +1889,13 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "windows_system_processes{job=~\"$job\",instance=~\"$instance\"}",
+                        "expr": "max by (instance) (windows_system_processes{job=~\"$job\", instance=~\"$instance\"})",
                         "instant": false,
                         "interval": "",
                         "legendFormat": "Number of processes"
@@ -2034,13 +2046,13 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
                       "spec": {
                         "editorMode": "code",
-                        "expr": "(irate(windows_net_bytes_total{job=~\"$job\",instance=~\"$instance\",nic!~'isatap.*|VPN.*'}[5m]) * 8 / windows_net_current_bandwidth_bytes{job=~\"$job\",instance=~\"$instance\",nic!~'isatap.*|VPN.*'}) * 100",
+                        "expr": "(max by (interface) (rate(windows_net_bytes_total{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"}[$__rate_interval])) * 8 / max by (interface) (windows_net_current_bandwidth_bytes{job=~\"$job\", instance=~\"$instance\", interface!~\"isatap.*|VPN.*\"})) * 100\r\n",
                         "legendFormat": "{{nic}}",
                         "range": true
                       },
@@ -3183,7 +3195,7 @@
               },
               "options": {
                 "cellHeight": "sm",
-                "frameIndex": 2,
+                "frameIndex": 0,
                 "showHeader": true
               }
             },
@@ -4208,7 +4220,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4216,7 +4228,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "sum(windows_service_state{job=~\"$job\",instance=~\"$instance\"}) by (state)",
+                        "editorMode": "code",
+                        "expr": "sum by (state) (windows_service_state{job=~\"$job\", instance=~\"$instance\"})\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4235,6 +4248,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 5
                       },
                       "version": "v0"
@@ -4412,7 +4426,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4420,7 +4434,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_logical_disk_read_bytes_total{job=~\"$job\",instance=~\"$instance\"}[5m])\r",
+                        "editorMode": "code",
+                        "expr": "max by (volume) (rate(windows_logical_disk_write_bytes_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))\r\n",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4439,6 +4454,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -4452,7 +4468,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4460,7 +4476,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_logical_disk_write_bytes_total{job=~\"$job\",instance=~\"$instance\"}[5m])\r",
+                        "editorMode": "code",
+                        "expr": "max by (volume) (rate(windows_logical_disk_read_bytes_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4479,6 +4496,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -4598,7 +4616,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4606,7 +4624,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_logical_disk_reads_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "editorMode": "code",
+                        "expr": "max by (volume) (rate(windows_logical_disk_writes_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4625,6 +4644,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -4638,7 +4658,7 @@
                     "hidden": false,
                     "query": {
                       "datasource": {
-                        "name": "cfqezitjkbbpcb"
+                        "name": "PBFA97CFB590B2093"
                       },
                       "group": "prometheus",
                       "kind": "DataQuery",
@@ -4646,7 +4666,8 @@
                         "application": {
                           "filter": ""
                         },
-                        "expr": "irate(windows_logical_disk_writes_total{job=~\"$job\",instance=~\"$instance\"}[5m])",
+                        "editorMode": "code",
+                        "expr": "max by (volume) (rate(windows_logical_disk_reads_total{job=~\"$job\", instance=~\"$instance\"}[$__rate_interval]))",
                         "format": "time_series",
                         "functions": [],
                         "group": {
@@ -4665,6 +4686,7 @@
                         "options": {
                           "showDisabledItems": false
                         },
+                        "range": true,
                         "step": 20
                       },
                       "version": "v0"
@@ -5179,7 +5201,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-1h",
+      "from": "now-3h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
