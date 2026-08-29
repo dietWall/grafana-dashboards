@@ -2,38 +2,24 @@
   "apiVersion": "dashboard.grafana.app/v2",
   "kind": "Dashboard",
   "metadata": {
-    "name": "ffxEJdvGz",
-    "namespace": "default",
-    "uid": "d8f353a9-46cb-4999-908f-f2d08b8436a9",
-    "resourceVersion": "1788022321390016",
-    "generation": 10,
-    "creationTimestamp": "2026-08-29T16:09:18Z",
-    "labels": {
-      "grafana.app/deprecatedInternalID": "4062508694544384"
-    },
-    "annotations": {
-      "grafana.app/createdBy": "user:afs9gj3wgun0ge",
-      "grafana.app/saved-from-ui": "Grafana v13.1.3 (45a27d64b6)",
-      "grafana.app/updatedBy": "user:afs9gj3wgun0ge",
-      "grafana.app/updatedTimestamp": "2026-08-29T16:52:01Z"
-    }
+    "name": "ffxEJdvGz"
   },
   "spec": {
     "annotations": [
       {
         "kind": "AnnotationQuery",
         "spec": {
-          "query": {
-            "kind": "DataQuery",
-            "group": "grafana",
-            "version": "v0",
-            "spec": {}
-          },
+          "builtIn": true,
           "enable": true,
           "hide": true,
           "iconColor": "rgba(0, 211, 255, 1)",
-          "name": "Annotations & Alerts",
-          "builtIn": true
+          "name": "Annotations \u0026 Alerts",
+          "query": {
+            "group": "grafana",
+            "kind": "DataQuery",
+            "spec": {},
+            "version": "v0"
+          }
         }
       }
     ],
@@ -44,10 +30,6 @@
       "panel-2": {
         "kind": "Panel",
         "spec": {
-          "id": 2,
-          "title": "Loki Search",
-          "description": "",
-          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -55,35 +37,42 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
+                    "hidden": false,
                     "query": {
-                      "kind": "DataQuery",
-                      "group": "loki",
-                      "version": "v0",
                       "datasource": {
                         "name": "P8E80F9AEF21F6940"
                       },
+                      "group": "loki",
+                      "kind": "DataQuery",
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
                         "expr": "{unit=~\"$Service\", level=~\"$Severity\"}",
                         "legendFormat": "",
                         "queryType": "range"
-                      }
+                      },
+                      "version": "v0"
                     },
-                    "refId": "A",
-                    "hidden": false
+                    "refId": "A"
                   }
                 }
               ],
-              "transformations": [],
-              "queryOptions": {}
+              "queryOptions": {},
+              "transformations": []
             }
           },
+          "description": "",
+          "id": 2,
+          "links": [],
+          "title": "Loki Search",
           "vizConfig": {
-            "kind": "VizConfig",
             "group": "logs",
-            "version": "13.1.3",
+            "kind": "VizConfig",
             "spec": {
+              "fieldConfig": {
+                "defaults": {},
+                "overrides": []
+              },
               "options": {
                 "dedupStrategy": "none",
                 "enableInfiniteScrolling": false,
@@ -98,22 +87,15 @@
                 "timestampResolution": "ms",
                 "unwrappedColumns": false,
                 "wrapLogMessage": true
-              },
-              "fieldConfig": {
-                "defaults": {},
-                "overrides": []
               }
-            }
+            },
+            "version": "13.1.3"
           }
         }
       },
       "panel-4": {
         "kind": "Panel",
         "spec": {
-          "id": 4,
-          "title": "Metric Rate",
-          "description": "",
-          "links": [],
           "data": {
             "kind": "QueryGroup",
             "spec": {
@@ -121,92 +103,61 @@
                 {
                   "kind": "PanelQuery",
                   "spec": {
+                    "hidden": false,
                     "query": {
-                      "kind": "DataQuery",
-                      "group": "loki",
-                      "version": "v0",
                       "datasource": {
                         "name": "P8E80F9AEF21F6940"
                       },
+                      "group": "loki",
+                      "kind": "DataQuery",
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
                         "expr": "sum by (unit) (count_over_time({job=\"systemd-journal\", unit=~\"$Service\"}[$__interval]))",
                         "legendFormat": "{{ container_name }}",
                         "queryType": "range"
-                      }
+                      },
+                      "version": "v0"
                     },
-                    "refId": "A",
-                    "hidden": false
+                    "refId": "A"
                   }
                 },
                 {
                   "kind": "PanelQuery",
                   "spec": {
+                    "hidden": false,
                     "query": {
-                      "kind": "DataQuery",
-                      "group": "loki",
-                      "version": "v0",
                       "datasource": {
                         "name": "P8E80F9AEF21F6940"
                       },
+                      "group": "loki",
+                      "kind": "DataQuery",
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
                         "expr": "sum by (unit)(count_over_time({job=\"systemd-journal\"}[$__interval]))",
                         "queryType": "range"
-                      }
+                      },
+                      "version": "v0"
                     },
-                    "refId": "B",
-                    "hidden": false
+                    "refId": "B"
                   }
                 }
               ],
-              "transformations": [],
-              "queryOptions": {}
+              "queryOptions": {},
+              "transformations": []
             }
           },
+          "description": "",
+          "id": 4,
+          "links": [],
+          "title": "Metric Rate",
           "vizConfig": {
-            "kind": "VizConfig",
             "group": "timeseries",
-            "version": "13.1.3",
+            "kind": "VizConfig",
             "spec": {
-              "options": {
-                "alertThreshold": true,
-                "annotations": {
-                  "clustering": -1,
-                  "multiLane": false
-                },
-                "legend": {
-                  "calcs": [],
-                  "displayMode": "table",
-                  "enableFacetedFilter": false,
-                  "overflow": "ellipsis",
-                  "placement": "right",
-                  "showLegend": true
-                },
-                "tooltip": {
-                  "hideZeros": false,
-                  "mode": "multi",
-                  "sort": "desc"
-                }
-              },
               "fieldConfig": {
                 "defaults": {
-                  "unit": "short",
-                  "thresholds": {
-                    "mode": "absolute",
-                    "steps": [
-                      {
-                        "value": 0,
-                        "color": "green"
-                      },
-                      {
-                        "value": 80,
-                        "color": "red"
-                      }
-                    ]
-                  },
                   "color": {
                     "mode": "palette-classic"
                   },
@@ -243,7 +194,21 @@
                     "thresholdsStyle": {
                       "mode": "off"
                     }
-                  }
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  },
+                  "unit": "short"
                 },
                 "overrides": [
                   {
@@ -367,8 +332,29 @@
                     ]
                   }
                 ]
+              },
+              "options": {
+                "alertThreshold": true,
+                "annotations": {
+                  "clustering": -1,
+                  "multiLane": false
+                },
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "table",
+                  "enableFacetedFilter": false,
+                  "overflow": "ellipsis",
+                  "placement": "right",
+                  "showLegend": true
+                },
+                "tooltip": {
+                  "hideZeros": false,
+                  "mode": "multi",
+                  "sort": "desc"
+                }
               }
-            }
+            },
+            "version": "13.1.3"
           }
         }
       }
@@ -380,40 +366,50 @@
           {
             "kind": "GridLayoutItem",
             "spec": {
-              "x": 0,
-              "y": 0,
-              "width": 24,
-              "height": 8,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-4"
-              }
+              },
+              "height": 8,
+              "width": 24,
+              "x": 0,
+              "y": 0
             }
           },
           {
             "kind": "GridLayoutItem",
             "spec": {
-              "x": 0,
-              "y": 8,
-              "width": 24,
-              "height": 14,
               "element": {
                 "kind": "ElementReference",
                 "name": "panel-2"
-              }
+              },
+              "height": 14,
+              "width": 24,
+              "x": 0,
+              "y": 8
             }
           }
         ]
       }
     },
-    "links": [],
+    "links": [
+      {
+        "asDropdown": false,
+        "icon": "external link",
+        "includeVars": false,
+        "keepTime": false,
+        "tags": [],
+        "targetBlank": true,
+        "title": "Source (GitHub)",
+        "tooltip": "View source file in repository",
+        "type": "link",
+        "url": "https://github.com/dietWall/grafana-dashboards/blob/master/loki_dashboard.json"
+      }
+    ],
     "liveNow": false,
     "preload": false,
     "tags": [],
     "timeSettings": {
-      "timezone": "browser",
-      "from": "now-1h",
-      "to": "now",
       "autoRefresh": "1m",
       "autoRefreshIntervals": [
         "5s",
@@ -427,102 +423,105 @@
         "2h",
         "1d"
       ],
+      "fiscalYearStartMonth": 0,
+      "from": "now-1h",
       "hideTimepicker": false,
-      "fiscalYearStartMonth": 0
+      "timezone": "browser",
+      "to": "now"
     },
     "title": "Loki Logs",
     "variables": [
       {
         "kind": "DatasourceVariable",
         "spec": {
+          "allowCustomValue": true,
+          "current": {
+            "text": "Loki",
+            "value": "P8E80F9AEF21F6940"
+          },
+          "hide": "dontHide",
+          "includeAll": false,
+          "multi": false,
           "name": "datasource",
+          "options": [],
           "pluginId": "loki",
           "refresh": "onDashboardLoad",
           "regex": "",
-          "current": {
-            "text": "Loki",
-            "value": "Loki"
-          },
-          "options": [],
-          "multi": false,
-          "includeAll": false,
-          "hide": "dontHide",
-          "skipUrlSync": false,
-          "allowCustomValue": true
+          "skipUrlSync": false
         }
       },
       {
         "kind": "QueryVariable",
         "spec": {
-          "name": "Service",
+          "allowCustomValue": true,
           "current": {
-            "text": "odysseus.service",
-            "value": "odysseus.service"
+            "text": "All",
+            "value": "$__all"
           },
-          "label": "Unit",
-          "hide": "dontHide",
-          "refresh": "onDashboardLoad",
-          "skipUrlSync": false,
+          "definition": "",
           "description": "Systemd Unit",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Unit",
+          "multi": false,
+          "name": "Service",
+          "options": [],
           "query": {
-            "kind": "DataQuery",
-            "group": "loki",
-            "version": "v0",
             "datasource": {
               "name": "P8E80F9AEF21F6940"
             },
+            "group": "loki",
+            "kind": "DataQuery",
             "spec": {
               "label": "unit",
               "refId": "LokiVariableQueryEditor-VariableQuery",
               "stream": "",
               "type": 1
-            }
+            },
+            "version": "v0"
           },
+          "refresh": "onDashboardLoad",
           "regex": "",
           "regexApplyTo": "value",
-          "sort": "disabled",
-          "definition": "",
-          "options": [],
-          "multi": false,
-          "includeAll": true,
-          "allowCustomValue": true
+          "skipUrlSync": false,
+          "sort": "disabled"
         }
       },
       {
         "kind": "QueryVariable",
         "spec": {
-          "name": "Severity",
+          "allowCustomValue": false,
           "current": {
             "text": "info",
             "value": "info"
           },
-          "label": "Level",
-          "hide": "dontHide",
-          "refresh": "onDashboardLoad",
-          "skipUrlSync": false,
+          "definition": "",
           "description": "Selects a level",
+          "hide": "dontHide",
+          "includeAll": true,
+          "label": "Level",
+          "multi": false,
+          "name": "Severity",
+          "options": [],
           "query": {
-            "kind": "DataQuery",
-            "group": "loki",
-            "version": "v0",
             "datasource": {
               "name": "${datasource}"
             },
+            "group": "loki",
+            "kind": "DataQuery",
             "spec": {
               "label": "level",
               "refId": "LokiVariableQueryEditor-VariableQuery",
               "stream": "",
               "type": 1
-            }
+            },
+            "version": "v0"
           },
+          "refresh": "onDashboardLoad",
           "regex": "",
           "regexApplyTo": "value",
-          "sort": "disabled",
-          "definition": "",
-          "options": [],
-          "multi": false,
-          "includeAll": true,
-          "allowCustomValue": false
+          "skipUrlSync": false,
+          "sort": "disabled"
         }
       }
     ]
