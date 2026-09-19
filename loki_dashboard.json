@@ -347,6 +347,7 @@
                   "calcs": [],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
+                  "limit": 5,
                   "overflow": "ellipsis",
                   "placement": "right",
                   "showLegend": true
@@ -428,7 +429,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-7d",
+      "from": "now-1h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
@@ -459,9 +460,7 @@
         "spec": {
           "allowCustomValue": true,
           "current": {
-            "text": [
-              "All"
-            ],
+            "text": "All",
             "value": [
               "$__all"
             ]
