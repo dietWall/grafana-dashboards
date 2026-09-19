@@ -75,11 +75,15 @@
               },
               "options": {
                 "dedupStrategy": "none",
+                "displayedFields": [
+                  "___LOG_LINE_BODY___",
+                  "unit"
+                ],
                 "enableInfiniteScrolling": false,
                 "enableLogDetails": true,
                 "prettifyLogMessage": true,
                 "showControls": false,
-                "showFieldSelector": false,
+                "showFieldSelector": true,
                 "showLabels": false,
                 "showLevel": true,
                 "showTime": true,
@@ -424,7 +428,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-1h",
+      "from": "now-7d",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
@@ -455,15 +459,19 @@
         "spec": {
           "allowCustomValue": true,
           "current": {
-            "text": "All",
-            "value": "$__all"
+            "text": [
+              "All"
+            ],
+            "value": [
+              "$__all"
+            ]
           },
           "definition": "",
           "description": "Systemd Unit",
           "hide": "dontHide",
           "includeAll": true,
           "label": "Unit",
-          "multi": false,
+          "multi": true,
           "name": "Service",
           "options": [],
           "query": {
@@ -492,8 +500,8 @@
         "spec": {
           "allowCustomValue": false,
           "current": {
-            "text": "info",
-            "value": "info"
+            "text": "All",
+            "value": "$__all"
           },
           "definition": "",
           "description": "Selects a level",
