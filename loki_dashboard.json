@@ -117,34 +117,13 @@
                       "spec": {
                         "direction": "backward",
                         "editorMode": "code",
-                        "expr": "sum by (unit) (count_over_time({job=\"systemd-journal\", unit=~\"$Service\"}[$__interval]))",
+                        "expr": "count_over_time({job=\"systemd-journal\"}[$__interval])",
                         "legendFormat": "{{ container_name }}",
                         "queryType": "range"
                       },
                       "version": "v0"
                     },
                     "refId": "A"
-                  }
-                },
-                {
-                  "kind": "PanelQuery",
-                  "spec": {
-                    "hidden": false,
-                    "query": {
-                      "datasource": {
-                        "name": "P8E80F9AEF21F6940"
-                      },
-                      "group": "loki",
-                      "kind": "DataQuery",
-                      "spec": {
-                        "direction": "backward",
-                        "editorMode": "code",
-                        "expr": "sum by (unit)(count_over_time({job=\"systemd-journal\"}[$__interval]))",
-                        "queryType": "range"
-                      },
-                      "version": "v0"
-                    },
-                    "refId": "B"
                   }
                 }
               ],
@@ -155,7 +134,7 @@
           "description": "",
           "id": 4,
           "links": [],
-          "title": "Metric Rate",
+          "title": "Log Amount",
           "vizConfig": {
             "group": "timeseries",
             "kind": "VizConfig",
@@ -173,7 +152,7 @@
                     "axisPlacement": "auto",
                     "barAlignment": 0,
                     "barWidthFactor": 0.6,
-                    "drawStyle": "line",
+                    "drawStyle": "bars",
                     "fillOpacity": 0,
                     "gradientMode": "none",
                     "hideFrom": {
@@ -182,7 +161,7 @@
                       "viz": false
                     },
                     "insertNulls": false,
-                    "lineInterpolation": "linear",
+                    "lineInterpolation": "stepBefore",
                     "lineWidth": 1,
                     "pointSize": 5,
                     "scaleDistribution": {
@@ -347,15 +326,109 @@
                   "calcs": [],
                   "displayMode": "table",
                   "enableFacetedFilter": false,
+                  "limit": 5,
                   "overflow": "ellipsis",
                   "placement": "right",
-                  "showLegend": true
+                  "showLegend": false
                 },
                 "tooltip": {
                   "hideZeros": false,
                   "mode": "multi",
                   "sort": "desc"
                 }
+              }
+            },
+            "version": "13.1.3"
+          }
+        }
+      },
+      "panel-7": {
+        "kind": "Panel",
+        "spec": {
+          "data": {
+            "kind": "QueryGroup",
+            "spec": {
+              "queries": [
+                {
+                  "kind": "PanelQuery",
+                  "spec": {
+                    "hidden": false,
+                    "query": {
+                      "datasource": {
+                        "name": "P8E80F9AEF21F6940"
+                      },
+                      "group": "loki",
+                      "kind": "DataQuery",
+                      "spec": {
+                        "direction": "backward",
+                        "editorMode": "code",
+                        "expr": "sort_desc(\r\n  sum by (unit) (\r\n    count_over_time({job=\"systemd-journal\"}[$__range])\r\n  )\r\n)",
+                        "legendFormat": "{{unit}}",
+                        "queryType": "range"
+                      },
+                      "version": "v0"
+                    },
+                    "refId": "A"
+                  }
+                }
+              ],
+              "queryOptions": {},
+              "transformations": []
+            }
+          },
+          "description": "",
+          "id": 7,
+          "links": [],
+          "title": "Logs/Service",
+          "vizConfig": {
+            "group": "bargauge",
+            "kind": "VizConfig",
+            "spec": {
+              "fieldConfig": {
+                "defaults": {
+                  "color": {
+                    "mode": "thresholds"
+                  },
+                  "thresholds": {
+                    "mode": "absolute",
+                    "steps": [
+                      {
+                        "color": "green",
+                        "value": 0
+                      },
+                      {
+                        "color": "red",
+                        "value": 80
+                      }
+                    ]
+                  }
+                },
+                "overrides": []
+              },
+              "options": {
+                "displayMode": "gradient",
+                "legend": {
+                  "calcs": [],
+                  "displayMode": "list",
+                  "overflow": "ellipsis",
+                  "placement": "bottom",
+                  "showLegend": false
+                },
+                "maxVizHeight": 300,
+                "minVizHeight": 16,
+                "minVizWidth": 8,
+                "namePlacement": "auto",
+                "orientation": "horizontal",
+                "reduceOptions": {
+                  "calcs": [
+                    "lastNotNull"
+                  ],
+                  "fields": "",
+                  "values": false
+                },
+                "showUnfilled": true,
+                "sizing": "auto",
+                "valueMode": "text"
               }
             },
             "version": "13.1.3"
@@ -372,11 +445,24 @@
             "spec": {
               "element": {
                 "kind": "ElementReference",
+                "name": "panel-7"
+              },
+              "height": 8,
+              "width": 12,
+              "x": 0,
+              "y": 0
+            }
+          },
+          {
+            "kind": "GridLayoutItem",
+            "spec": {
+              "element": {
+                "kind": "ElementReference",
                 "name": "panel-4"
               },
               "height": 8,
-              "width": 24,
-              "x": 0,
+              "width": 12,
+              "x": 12,
               "y": 0
             }
           },
@@ -414,7 +500,7 @@
     "preload": false,
     "tags": [],
     "timeSettings": {
-      "autoRefresh": "1m",
+      "autoRefresh": "10s",
       "autoRefreshIntervals": [
         "5s",
         "10s",
@@ -428,7 +514,7 @@
         "1d"
       ],
       "fiscalYearStartMonth": 0,
-      "from": "now-7d",
+      "from": "now-6h",
       "hideTimepicker": false,
       "timezone": "browser",
       "to": "now"
@@ -500,15 +586,23 @@
         "spec": {
           "allowCustomValue": false,
           "current": {
-            "text": "All",
-            "value": "$__all"
+            "text": [
+              "warning",
+              "error",
+              "info"
+            ],
+            "value": [
+              "warning",
+              "error",
+              "info"
+            ]
           },
           "definition": "",
           "description": "Selects a level",
           "hide": "dontHide",
           "includeAll": true,
           "label": "Level",
-          "multi": false,
+          "multi": true,
           "name": "Severity",
           "options": [],
           "query": {
